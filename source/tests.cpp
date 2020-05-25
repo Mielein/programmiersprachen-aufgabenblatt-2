@@ -2,6 +2,7 @@
 #include <catch.hpp>
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "color.hpp"
 
 TEST_CASE("vec2 test","[vec2]"){
   Vec2 const a{};
@@ -312,6 +313,25 @@ TEST_CASE("mat2 test make_rotation_mat2","[mat2]"){
   REQUIRE(mat2.e_01 == Approx(0.01745f));
   REQUIRE(mat2.e_10 == Approx(-0.01745f));
   REQUIRE(mat2.e_11 == Approx(0.99985f));
+}
+
+TEST_CASE("color test rgb", "[color]"){
+  Color color{};
+  Color zero{0.0f,0.0f,0.0f};
+  Color random{0.3f,0.8f,1.0f};
+  //color
+  REQUIRE(color.r == Approx(0.5f));
+  REQUIRE(color.g == Approx(0.5f));
+  REQUIRE(color.b == Approx(0.5f));
+  //zero
+  REQUIRE(zero.r == Approx(0.0f));
+  REQUIRE(zero.g == Approx(0.0f));
+  REQUIRE(zero.b == Approx(0.0f));
+  //random
+  REQUIRE(random.r == Approx(0.3f));
+  REQUIRE(random.g == Approx(0.8f));
+  REQUIRE(random.b == Approx(1.0f));
+
 }
 
 int main(int argc, char *argv[])
