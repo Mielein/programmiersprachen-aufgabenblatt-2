@@ -170,6 +170,150 @@ TEST_CASE("mat2 test *","[mat2]"){
   REQUIRE(mat4.e_11 == Approx(22.0f));
 }
 
+TEST_CASE("mat2 test det()","[mat2]"){
+  Mat2 mat0{};
+  Mat2 zero{0.0f,0.0f,0.0f,0.0f};
+  Mat2 mat1{1.0f,1.0f,1.0f,1.0f};
+  Mat2 count{1.0f,2.0f,3.0f,4.0f};
+  Mat2 count1{-1.0f,-2.0f,-3.0f,-4.0f};
+
+  REQUIRE(mat0.det()==Approx(1.0f));
+  REQUIRE(zero.det()==Approx(0.0f));
+  REQUIRE(mat1.det()==Approx(0.0f));
+  REQUIRE(count.det()==Approx(-2.0f));
+  REQUIRE(count1.det()==Approx(-2.0f));
+}
+
+TEST_CASE("mat2 test vec*mat","[mat2]"){
+  Mat2 mat0{};
+  Mat2 zero{0.0f,0.0f,0.0f,0.0f};
+  Mat2 mat1{1.0f,1.0f,1.0f,1.0f};
+  Mat2 count{1.0f,2.0f,3.0f,4.0f};
+  Mat2 count1{-1.0f,-2.0f,-3.0f,-4.0f};
+
+  Vec2 a{};
+  Vec2 b{5.1f,-9.3f};
+  Vec2 c{0.0f,0.0f};
+  Vec2 d{5.0f,3.0f};
+
+  a = mat0*a;
+  b = mat1*b;
+  c = zero*c;
+  d = count*d;
+
+  REQUIRE(a.x == Approx(0.0f));
+  REQUIRE(a.y == Approx(0.0f));
+  REQUIRE(b.x == Approx(-4.2f));
+  REQUIRE(b.x == Approx(-4.2f));
+  REQUIRE(c.x == Approx(0.0f));
+  REQUIRE(c.y == Approx(0.0f));
+  REQUIRE(d.x == Approx(11.0f));
+  REQUIRE(d.y == Approx(27.0f));
+}
+
+TEST_CASE("mat2 test transpose"){
+  Mat2 mat0{};
+  Mat2 zero{0.0f,0.0f,0.0f,0.0f};
+  Mat2 mat1{1.0f,1.0f,1.0f,1.0f};
+  Mat2 count{1.0f,2.0f,3.0f,4.0f};
+  Mat2 count1{-1.0f,-2.0f,-3.0f,-4.0f};
+
+  Mat2 a{transpose(mat0)};
+  Mat2 b{transpose(zero)};
+  Mat2 c{transpose(mat1)};
+  Mat2 d{transpose(count)};
+  Mat2 e{transpose(count1)};
+
+  REQUIRE(a.e_00 == Approx(1.0f));
+  REQUIRE(a.e_01 == Approx(0.0f));
+  REQUIRE(a.e_10 == Approx(0.0f));
+  REQUIRE(a.e_11 == Approx(1.0f));
+  REQUIRE(b.e_00 == Approx(0.0f));
+  REQUIRE(b.e_01 == Approx(0.0f));
+  REQUIRE(b.e_10 == Approx(0.0f));
+  REQUIRE(b.e_11 == Approx(0.0f));
+  REQUIRE(c.e_00 == Approx(1.0f));
+  REQUIRE(c.e_01 == Approx(1.0f));
+  REQUIRE(c.e_10 == Approx(1.0f));
+  REQUIRE(c.e_11 == Approx(1.0f));
+  REQUIRE(d.e_00 == Approx(1.0f));
+  REQUIRE(d.e_01 == Approx(3.0f));
+  REQUIRE(d.e_10 == Approx(2.0f));
+  REQUIRE(d.e_11 == Approx(4.0f));
+  REQUIRE(e.e_00 == Approx(-1.0f));
+  REQUIRE(e.e_01 == Approx(-3.0f));
+  REQUIRE(e.e_10 == Approx(-2.0f));
+  REQUIRE(e.e_11 == Approx(-4.0f));
+}
+
+  TEST_CASE("mat2 test inverse","[mat2]"){
+  Mat2 mat0{};
+  Mat2 zero{0.0f,0.0f,0.0f,0.0f};
+  Mat2 mat1{1.0f,1.0f,1.0f,1.0f};
+  Mat2 count{1.0f,2.0f,3.0f,4.0f};
+  Mat2 count1{-1.0f,-2.0f,-3.0f,-4.0f};
+
+  Mat2 a = inverse(mat0);
+  Mat2 b = inverse(zero);
+  Mat2 c = inverse(mat1);
+  Mat2 d = inverse(count);
+  Mat2 e = inverse(count1);
+  //a
+  REQUIRE(a.e_00 == Approx(1.0f));
+  REQUIRE(a.e_01 == Approx(0.0f));
+  REQUIRE(a.e_10 == Approx(0.0f));
+  REQUIRE(a.e_11 == Approx(1.0f));
+  //b
+  REQUIRE(b.e_00 == Approx(0.0f));
+  REQUIRE(b.e_01 == Approx(0.0f));
+  REQUIRE(b.e_10 == Approx(0.0f));
+  REQUIRE(b.e_11 == Approx(0.0f));
+  //c
+  REQUIRE(c.e_00 == Approx(1.0f));
+  REQUIRE(c.e_01 == Approx(1.0f));
+  REQUIRE(c.e_10 == Approx(1.0f));
+  REQUIRE(c.e_11 == Approx(1.0f));
+  //d
+  //REQUIRE(d.e_00 == Approx(-2.0f));
+  REQUIRE(d.e_01 == Approx(1.0f));
+  REQUIRE(d.e_10 == Approx(1.5f));
+  REQUIRE(d.e_11 == Approx(-0.5f));
+  //e
+  REQUIRE(e.e_00 == Approx(2.0f));
+  REQUIRE(e.e_01 == Approx(-1.0f));
+  REQUIRE(e.e_10 == Approx(-1.5f));
+  REQUIRE(e.e_11 == Approx(0.5f));
+}
+
+TEST_CASE("mat2 test make_rotation_mat2","[mat2]"){
+  
+  Mat2 mat0 ={make_rotation_mat2(90.0f)};
+  Mat2 zero ={make_rotation_mat2(0.0f)};
+  Mat2 mat1 ={make_rotation_mat2(1.0f)};
+  Mat2 mat2 ={make_rotation_mat2(-1.0f)};
+
+  //mat0
+  REQUIRE(mat0.e_00 == Approx(0.0f));
+  REQUIRE(mat0.e_01 == Approx(-1.0f));
+  REQUIRE(mat0.e_10 == Approx(1.0f));
+  REQUIRE(mat0.e_11 == Approx(0.0f));
+  //zero
+  REQUIRE(zero.e_00 == Approx(1.0f));
+  REQUIRE(zero.e_01 == Approx(0.0f));
+  REQUIRE(zero.e_10 == Approx(0.0f));
+  REQUIRE(zero.e_11 == Approx(1.0f));
+  //mat1
+  REQUIRE(mat1.e_00 == Approx(0.99985f));
+  REQUIRE(mat1.e_01 == Approx(-0.01745f));
+  REQUIRE(mat1.e_10 == Approx(0.01745f));
+  REQUIRE(mat1.e_11 == Approx(0.99985f));
+  //mat2
+  REQUIRE(mat2.e_00 == Approx(0.99985f));
+  REQUIRE(mat2.e_01 == Approx(0.01745f));
+  REQUIRE(mat2.e_10 == Approx(-0.01745f));
+  REQUIRE(mat2.e_11 == Approx(0.99985f));
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
