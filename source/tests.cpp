@@ -3,6 +3,8 @@
 #include "vec2.hpp"
 #include "mat2.hpp"
 #include "color.hpp"
+#include "circle.hpp"
+#include "rectangle.hpp"
 
 TEST_CASE("vec2 test","[vec2]"){
   Vec2 const a{};
@@ -332,6 +334,25 @@ TEST_CASE("color test rgb", "[color]"){
   REQUIRE(random.g == Approx(0.8f));
   REQUIRE(random.b == Approx(1.0f));
 
+}
+
+TEST_CASE("Circle test circumfence","[circle]"){
+  Circle c2{{1.0f,1.0f}, 2.0f, {0.5f,0.5f,0.5f}};
+  Circle c1{{1.0f,1.0f}, 1.0f, {0.5f,0.5f,0.5f}};
+  Circle c0{{1.0f,1.0f}, 0.0f, {0.5f,0.5f,0.5f}};
+
+  REQUIRE(c2.circumfence() == Approx(12.56637f));
+  REQUIRE(c1.circumfence() == Approx(6.28319f));
+  REQUIRE(c0.circumfence() == Approx(0.0f));
+}
+
+TEST_CASE("Rectangle test circumfence","[rectangle]"){
+  Rectangle rec2{{-2.0f,-3.0f},{2.0f,3.0f},{0.5f,0.5f,0.5f}};
+  //Rectangle rec1{{1.0f,1.0f},{1.0f,1.0f},{0.5f,0.5f,0.5f}};
+  
+
+  REQUIRE(rec2.circumfence() == Approx(3.0f));
+  //REQUIRE(rec1.circumfence() == Approx(0.0f));//what?
 }
 
 int main(int argc, char *argv[])
