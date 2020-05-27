@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
+#include <vector>
 
 
 int main(int argc, char* argv[])
@@ -45,16 +46,64 @@ int main(int argc, char* argv[])
   }
 
   Vec2 mouse{mouse_position.first, mouse_position.second};
-  Rectangle rec1{{200.0f,200.0f},{500.0f,500.0f},{0.0f,0.0f,1.0f}};
+  std::vector<Circle> circle;
+  std::vector<Rectangle> rectangle;
+
+
+  Rectangle rec1{{200.0f,200.0f},{400.0f,340.0f},{0.0f,0.0f,1.0f}};
+  Rectangle rec2{{100.0f,250.0f},{300.0f,1900.0f},{0.0f,1.0f,0.0f}};
+  Rectangle rec3{{400.0f,200.0f},{430.0f,400.0f},{1.0f,0.0f,0.0f}};
+  Rectangle rec4{{200.0f,500.0f},{120.0f,300.0f},{1.0f,0.0f,1.0f}};
+  Rectangle rec5{{120.0f,530.0f},{560.0f,140.0f},{0.0f,1.0f,1.0f}};
+  rec1.draw(win);
   if(rec1.is_inside(mouse)){
     rec1.set_highlight(true);
-  } 
-  Circle circ1{{350.0f,350.0f},150.0f,{1.0f,0.0f,0.0f},5.0f};
+  }
+  rec2.draw(win);
+  if(rec2.is_inside(mouse)){
+    rec2.set_highlight(true);
+  }
+  rec3.draw(win);
+  if(rec3.is_inside(mouse)){
+    rec3.set_highlight(true);
+  }
+  rec4.draw(win);
+  if(rec4.is_inside(mouse)){
+    rec4.set_highlight(true);
+  }
+  rec5.draw(win);
+  if(rec5.is_inside(mouse)){
+    rec5.set_highlight(true);
+  }
+  }
+  Circle circ1{{350.0f,550.0f},150.0f,{1.0f,0.0f,0.0f},5.0f};
+  Circle circ2{{100.0f,250.0f},300.0f,{0.0f,1.0f,0.0f},2.0f};
+  Circle circ3{{230.0f,300.0f},200.0f,{0.0f,0.0f,1.0f},3.0f};
+  Circle circ4{{100.0f,500.0f},50.0f,{1.0f,0.0f,1.0f},1.0f};
+  Circle circ5{{330.0f,400.0f},100.0f,{1.0f,1.0f,1.0f},7.0f};
+
+  circ1.draw(win);
   if(circ1.is_inside(mouse)){
     circ1.set_highlight(true);
   }
-  circ1.draw(win); 
-  rec1.draw(win);
+  circ2.draw(win); 
+  if(circ2.is_inside(mouse)){
+  circ2.set_highlight(true);
+  }
+  circ3.draw(win); 
+  if(circ3.is_inside(mouse)){
+  circ3.set_highlight(true);
+  }
+  circ4.draw(win);
+  if(circ4.is_inside(mouse)){
+  circ4.set_highlight(true);
+  }
+  circ5.draw(win); 
+  if(circ5.is_inside(mouse)){
+  circ5.set_highlight(true);
+  }
+
+
   
     win.draw_line(0, mouse_position.second, 10, mouse_position.second, 0.0, 0.0, 0.0);
     win.draw_line(win.window_size().second - 10, mouse_position.second, win.window_size().second, mouse_position.second, 0.0, 0.0, 0.0);
