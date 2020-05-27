@@ -5,7 +5,12 @@ add_executable(example
   window.cpp
   glew.c
   example.cpp
+  rectangle.cpp
+  circle.cpp
+  mat2.cpp
+  vec2.cpp
   )
+
 target_link_libraries(example
   glfw
   ${GLFW_LIBRARIES}
@@ -13,6 +18,7 @@ target_link_libraries(example
   ${OPENGL_LIBRARIES}
   )
 add_dependencies(example glfw nanovg ${COPY_BINARY})
+
 
 
 # Build tests
@@ -23,6 +29,7 @@ add_executable(tests
   mat2.cpp
   circle.cpp
   rectangle.cpp
+  window.cpp
   )
 target_link_libraries(tests
   glfw
@@ -30,6 +37,16 @@ target_link_libraries(tests
   nanovg
   ${OPENGL_LIBRARIES}
   )
-
+  
+#Build clock
+add_executable(clock 
+  window.cpp
+  glew.c
+  clock.cpp
+  rectangle.cpp
+  circle.cpp
+  mat2.cpp
+  vec2.cpp
+)
 
 
