@@ -41,9 +41,14 @@ float Circle::circumfence() const{
 
 void Circle::draw(Window const& win) const{
     Color draw_color{clr_};
+    float thic{thicc_};
+
     if(highlighted_){
-        float const highlight_factor = 0.2f;
-        Color draw_color{clr_.r+highlight_factor,clr_.g+highlight_factor,clr_.b+highlight_factor};
+        float const highlight_factor_r{1-clr_.r};
+        float const highlight_factor_g{1-clr_.g};
+        float const highlight_factor_b{1-clr_.b};
+        Color draw_color{draw_color.r+highlight_factor_r,draw_color.g+highlight_factor_g,draw_color.b+highlight_factor_b};
+        float thic{thic+10.0f};
     }
     Vec2 current_pt{0,r_};
     Mat2 rotmat = make_rotation_mat2(1);
@@ -52,13 +57,12 @@ void Circle::draw(Window const& win) const{
         Vec2 new_point{current_pt.x+ctr_.x,current_pt.y+ctr_.y};
         
         //-1.0f to achieve thickness
-        win.draw_line(new_point.x-1.0f, new_point.y-1.0f, new_point.x, new_point.y, draw_color.r,draw_color.g,draw_color.b, thicc_);
+        win.draw_line(new_point.x-1.0f, new_point.y-1.0f, new_point.x, new_point.y, draw_color.r,draw_color.g,draw_color.b, thic);
     }
 }
 
 void Circle::set_highlight(bool highlighted){
     highlighted_=highlighted;
-
 }
 
 bool Circle::is_inside(Vec2 const point) const{
