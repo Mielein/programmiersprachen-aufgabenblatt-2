@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
 
 
 
-
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
     auto t = win.get_time();
@@ -75,7 +74,7 @@ int main(int argc, char* argv[])
   if(rec5.is_inside(mouse)){
     rec5.set_highlight(true);
   }
-  }
+  
   Circle circ1{{350.0f,550.0f},150.0f,{1.0f,0.0f,0.0f},5.0f};
   Circle circ2{{100.0f,250.0f},300.0f,{0.0f,1.0f,0.0f},2.0f};
   Circle circ3{{230.0f,300.0f},200.0f,{0.0f,0.0f,1.0f},3.0f};
@@ -110,9 +109,9 @@ int main(int argc, char* argv[])
 
     win.draw_line(mouse_position.first, 0, mouse_position.first, 10, 0.0, 0.0, 0.0);
     win.draw_line(mouse_position.first, win.window_size().second - 10, mouse_position.first, win.window_size().second, 0.0, 0.0, 0.0);
-
+  
     std::string display_text = "mouse position: (" + std::to_string(mouse_position.first) + ", " + std::to_string(mouse_position.second) + ")";
-    
+  
     int text_offset_x = 10;
     int text_offset_y = 5;
     unsigned int font_size = 35;

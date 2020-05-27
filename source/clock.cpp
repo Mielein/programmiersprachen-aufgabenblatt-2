@@ -9,16 +9,17 @@
 
 int main(int argc, char* argv[])
 {
-    Circle clock{{200.0f,200.0f}, 300.0f,{1.0f,0.0f,1.0f}};
+    
 
      Window win{std::make_pair(800,800)};
-     clock.draw(win);
+     Circle clock{{150.0f,150.0f}, 100.0f,{0.0f,0.0f,1.0f}};
 
     while (!win.should_close()) {
      if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         win.close();
         }  
 
+    clock.draw(win);
     Mat2 rotsec = make_rotation_mat2 (win.get_time()/60.0f);
     Mat2 rotmin = make_rotation_mat2 (win.get_time()/60.0f/60.0f);
     Mat2 rothour = make_rotation_mat2 (win.get_time()/60.0f/60.0f/60.0f);
@@ -35,6 +36,6 @@ int main(int argc, char* argv[])
     win.draw_line(200.0f,200.0f,200.0f+minute.x,200.0+minute.y,1.0f,0.0f,1.0f,2.0f);
     win.draw_line(200.0f,200.0f,200.0f+hour.x,200.0+hour.y,1.0f,0.0f,1.0f,2.0f);
 
-
+    win.update();
  }
 }
