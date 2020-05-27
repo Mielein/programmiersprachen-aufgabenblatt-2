@@ -30,7 +30,7 @@ Rectangle::Rectangle(Vec2 const& min, Vec2 const& max, Color const& color, float
     highlighted_{highlighted}{}
 
 float Rectangle::circumfence() const{
-    return abs((2*(max_.x -min_.x)+(2*(max_.y - min_.y))));
+    return (2*(max_.x -min_.x)+2*(max_.y - min_.y));
 }   
 
 void Rectangle::draw(Window const& win) const{

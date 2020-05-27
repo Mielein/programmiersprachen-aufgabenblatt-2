@@ -20,25 +20,35 @@ TEST_CASE("vec2 test","[vec2]"){
 TEST_CASE("vec2 test +=","[vec2]"){
   Vec2 const a{};
   Vec2 const b{5.1f,-9.3f};
+  Vec2 const null{0.0f,0.0f};
 
   Vec2 c{a};
   c += b;
+  Vec2 d{null};
+  d += null;
  
   //Test Vec2& operator+=(Vec2 const& v)
   REQUIRE(c.y == Approx(-9.3f));
   REQUIRE(c.x == Approx(5.1f));
+  REQUIRE(d.x == Approx(0.0f));
+  REQUIRE(d.y == Approx(0.0f));
 }
 
 TEST_CASE("vec2 test -=","[vec2]"){
   Vec2 const a{};
   Vec2 const b{5.1f,-9.3f};
+  Vec2 const null{0.0f,0.0f};
   
   Vec2 c{a};
   c -= b;
+  Vec2 d{null};
+  d -= null;
 
   //Test Vec2& operator-=(Vec2 const& v)
   REQUIRE(c.x == Approx(-5.1f));
   REQUIRE(c.y == Approx(9.3f));
+  REQUIRE(d.x == Approx(0.0f));
+  REQUIRE(d.y == Approx(0.0f));
 }
 
 TEST_CASE("vec2 test *=","[vec2]"){
@@ -353,7 +363,7 @@ TEST_CASE("Rectangle test circumfence","[rectangle]"){
   
 
   REQUIRE(rec2.circumfence() == Approx(20.0f));
-  //REQUIRE(rec1.circumfence() == Approx(0.0f));//what?
+  //REQUIRE(rec1.circumfence() == Approx(0.0f));//what??? 
 }
 
 TEST_CASE("is_inside test circle","[circle]"){
