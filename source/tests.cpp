@@ -5,6 +5,7 @@
 #include "color.hpp"
 #include "circle.hpp"
 #include "rectangle.hpp"
+#include "window.hpp"
 
 TEST_CASE("vec2 test","[vec2]"){
   Vec2 const a{};
@@ -351,9 +352,38 @@ TEST_CASE("Rectangle test circumfence","[rectangle]"){
   //Rectangle rec1{{1.0f,1.0f},{1.0f,1.0f},{0.5f,0.5f,0.5f}};
   
 
-  REQUIRE(rec2.circumfence() == Approx(3.0f));
+  REQUIRE(rec2.circumfence() == Approx(20.0f));
   //REQUIRE(rec1.circumfence() == Approx(0.0f));//what?
 }
+
+TEST_CASE("is_inside test circle","[circle]"){
+  Circle c1{{1.0f,1.0f}, 2.0f, {0.5f,0.5f,0.5f}};
+  Vec2 pt1{1.0f,1.0f};
+  Vec2 pt3{0.0f,0.0f};
+  bool a = c1.is_inside(pt1);
+  REQUIRE(a == true);
+
+  Circle c2{{2.0f,2.0f}, 1.0f, {0.5f,0.5f,0.5f}};
+  bool b = c2.is_inside(pt1);
+  REQUIRE(b == false);
+
+  Circle c4{{0.0f,0.0f},1.0f,{}};
+  bool d = c4.is_inside(pt3);
+  REQUIRE(d == true);
+}
+
+TEST_CASE("is_inside test rectangle","[rectangle]"){
+  Rectangle rec2{{-2.0f,-3.0f},{2.0f,3.0f},{0.5f,0.5f,0.5f}};
+  Vec2 pt1{1.0f,-2.0f};
+  bool a = rec2.is_inside(pt1);
+  REQUIRE(a == true);
+
+  Rectangle rec1{{1.0f,1.0f},{1.0f,1.0f},{0.5f,0.5f,0.5f}};
+  Vec2 pt2{-2.0f,8.0f};
+  bool b = rec1.is_inside(pt2);
+  REQUIRE(b == false);
+}
+
 
 int main(int argc, char *argv[])
 {

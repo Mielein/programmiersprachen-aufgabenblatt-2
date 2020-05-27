@@ -1,4 +1,7 @@
 #include "window.hpp"
+#include "vec2.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
@@ -11,7 +14,10 @@ int main(int argc, char* argv[])
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       win.close();
-    }
+    }  
+
+
+
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
@@ -36,8 +42,20 @@ int main(int argc, char* argv[])
                     mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
                     1.0,0.0,0.0, // color with r,g,b in [0.0, 1.0]
                     1.0);        // line thickness = 1.0 * default thickness
-    }
+  }
 
+  Vec2 mouse{mouse_position.first, mouse_position.second};
+  Rectangle rec1{{200.0f,200.0f},{500.0f,500.0f},{0.0f,0.0f,1.0f}};
+  if(rec1.is_inside(mouse)){
+    rec1.set_highlight(true);
+  } 
+  Circle circ1{{350.0f,350.0f},150.0f,{1.0f,0.0f,0.0f},5.0f};
+  if(circ1.is_inside(mouse)){
+    circ1.set_highlight(true);
+  }
+  circ1.draw(win); 
+  rec1.draw(win);
+  
     win.draw_line(0, mouse_position.second, 10, mouse_position.second, 0.0, 0.0, 0.0);
     win.draw_line(win.window_size().second - 10, mouse_position.second, win.window_size().second, mouse_position.second, 0.0, 0.0, 0.0);
 
@@ -54,6 +72,8 @@ int main(int argc, char* argv[])
 
     win.update();
   }
+  
+
 
   return 0;
 }
